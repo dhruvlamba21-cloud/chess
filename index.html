@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#090a0d" />
+  <title>NOIR CHESS — Premium Chess</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+  <div class="grain"></div>
+
+  <header class="topbar">
+    <div class="brand-lockup">
+      <div class="brand-mark">♞</div>
+      <div>
+        <div class="brand">NOIR<span>CHESS</span></div>
+        <div class="brand-sub">THE ART OF THE GAME</div>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <button class="icon-btn" id="soundBtn" aria-label="Toggle sound" title="Sound">⌕</button>
+      <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Theme">◐</button>
+      <button class="new-btn" id="newGameBtn">NEW GAME</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="play-area">
+      <div class="player-row top-player">
+        <div class="player-id">
+          <div class="avatar ai">♛</div>
+          <div>
+            <div class="player-name">NOIR ENGINE</div>
+            <div class="player-meta"><span class="status-dot"></span><span id="topStatus">Computer · Black</span></div>
+          </div>
+        </div>
+        <div class="clock" id="blackClock">10:00</div>
+      </div>
+
+      <div class="board-frame">
+        <div class="board-shadow"></div>
+        <div id="board" class="board" aria-label="Chess board"></div>
+        <div class="board-glint"></div>
+      </div>
+
+      <div class="player-row bottom-player">
+        <div class="player-id">
+          <div class="avatar you">♔</div>
+          <div>
+            <div class="player-name">YOU</div>
+            <div class="player-meta"><span class="status-dot live"></span><span id="bottomStatus">Your turn · White</span></div>
+          </div>
+        </div>
+        <div class="clock active" id="whiteClock">10:00</div>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">MATCH CONTROL</div>
+          <h1>Classic <em>Game</em></h1>
+        </div>
+        <div class="match-pill" id="modePill">VS COMPUTER</div>
+      </div>
+
+      <div class="segmented" role="tablist" aria-label="Game mode">
+        <button class="seg active" data-mode="computer">Computer</button>
+        <button class="seg" data-mode="local">2 Players</button>
+      </div>
+
+      <div class="field-grid">
+        <label class="field">
+          <span>DIFFICULTY</span>
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>TIME CONTROL</span>
+          <select id="timeControl">
+            <option value="5">5 min</option>
+            <option value="10" selected>10 min</option>
+            <option value="15">15 min</option>
+            <option value="30">30 min</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="move-card">
+        <div class="card-title"><span>MOVE HISTORY</span><button class="tiny-btn" id="clearHistory">CLEAR</button></div>
+        <div id="moveHistory" class="moves empty">No moves yet</div>
+      </div>
+
+      <div class="captured-card">
+        <div class="card-title"><span>CAPTURED</span><span id="materialScore" class="score">+0.0</span></div>
+        <div class="captured-row">
+          <div id="whiteCaptured" class="captured-pieces"></div>
+          <div id="blackCaptured" class="captured-pieces"></div>
+        </div>
+      </div>
+
+      <div class="control-grid">
+        <button class="control-btn" id="undoBtn"><span>↶</span> UNDO</button>
+        <button class="control-btn" id="flipBtn"><span>⇄</span> FLIP BOARD</button>
+        <button class="control-btn primary" id="resignBtn"><span>⚑</span> RESIGN</button>
+      </div>
+
+      <div class="tip"><span>✦</span> <b>NOIR TIP</b><span id="tipText">Control the center before committing to an attack.</span></div>
+    </aside>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <dialog id="resultModal" class="result-modal">
+    <div class="result-kicker">GAME OVER</div>
+    <div id="resultIcon" class="result-icon">♔</div>
+    <h2 id="resultTitle">Checkmate</h2>
+    <p id="resultText">A decisive finish.</p>
+    <button id="modalNewGame" class="new-btn wide">PLAY AGAIN</button>
+  </dialog>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
