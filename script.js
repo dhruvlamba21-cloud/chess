@@ -254,8 +254,24 @@ document.getElementById('undoBtn').onclick=undoMove;
 document.getElementById('flipBtn').onclick=flipBoard;
 document.getElementById('resignBtn').onclick=resign;
 document.getElementById('clearHistory').onclick=()=>showToast('HISTORY CANNOT BE CLEARED MID-GAME');
+const themeBtn=document.getElementById('themeBtn');
+const themeColorMeta=document.getElementById('themeColorMeta');
+function applyTheme(theme, announce=false){
+  const dark=theme==='dark';
+  document.documentElement.dataset.theme=dark?'dark':'light';
+  themeBtn.textContent=dark?'☀':'☾';
+  themeBtn.setAttribute('aria-pressed',String(dark));
+  themeBtn.setAttribute('aria-label',dark?'Switch to white mode':'Switch to black mode');
+  themeBtn.title=dark?'Switch to white mode':'Switch to black mode';
+  themeColorMeta.setAttribute('content',dark?'#111113':'#f5f5f7');
+  localStorage.setItem('noir-chess-theme',dark?'dark':'light');
+  if(announce) showToast(dark?'BLACK MODE':'WHITE MODE');
+}
+const savedTheme=localStorage.getItem('noir-chess-theme');
+applyTheme(savedTheme==='dark'?'dark':'light');
+
 document.getElementById('soundBtn').onclick=()=>{soundOn=!soundOn;document.getElementById('soundBtn').textContent=soundOn?'⌕':'×';showToast(soundOn?'SOUND ON':'SOUND OFF');};
-document.getElementById('themeBtn').onclick=()=>{document.body.classList.toggle('light');showToast(document.body.classList.contains('light')?'LIGHT MODE':'NOIR MODE');};
+themeBtn.onclick=()=>applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark',true);
 document.querySelectorAll('.seg').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
 document.getElementById('difficulty').onchange=chooseDifficulty;
 document.getElementById('timeControl').onchange=changeTime;
